@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 
 //create a schema class
-var Schema = mongoose.schema;
+var Schema = mongoose.Schema;
 
 //Creating the Schema for each article
 var ArticleSchema = new Schema({
@@ -11,6 +11,6 @@ var ArticleSchema = new Schema({
   url: String
 });
 
-var Article = mongoose.model("Article", articleSchema);
+var Article = mongoose.model("Article", ArticleSchema);
 
 module.exports = Article;

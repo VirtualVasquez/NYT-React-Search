@@ -4,9 +4,7 @@ const Article = require('../models/Article');
 module.exports = {
 	//this method finds all articles in the db
 	find: function(req, res) {
-		Article
-			.find()
-			.then(function(doc) {
+		Article.find().then(function(doc) {
 				res.json(doc);
 			}).catch(function(err) {
 				res.json(err);
@@ -14,8 +12,7 @@ module.exports = {
 	},
 	// Addes new articles to the db
 	insert: function(req, res) {
-		Article.
-		create(req.body).then(function(doc) {
+		Article.create(req.body).then(function(doc) {
 			res.json(doc);
 		}).catch(function(err) {
 			res.json(err);
@@ -23,8 +20,7 @@ module.exports = {
 	},
 	// deletes articles form the db
 	delete: function(req, res) {
-		Article.
-		remove({
+		Article.remove({
 			_id: req.params.id
 		}).then(function(doc) {
 			res.json(doc);

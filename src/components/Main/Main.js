@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Results from "../Results/Results";
 import Saved from "../Saved/Saved";
 import Search from "../Search/Search";
-import API from "../utils/api";
+import api from "../utils/api";
 
 class Main extends Component {
     state =  {
@@ -20,7 +20,7 @@ class Main extends Component {
 
     //Method for getting saved articles (all articles) from the db
     getSavedArticles = () => {
-        API.getArticle()
+        api.getArticle()
         .then((res) => {
             this.setState({ saved: res.data });
         });
@@ -74,7 +74,7 @@ class Main extends Component {
     // When the search form submits, perfomr NYT api search with user input
     handleFormSubmit = (event) => {
         event.preventDefault();
-        API.searchNYT(this.state.topic, this.state.startYear, this.state.endYear)
+        api.searchNYT(this.state.topic, this.state.startYear, this.state.endYear)
         .then((res) => {
             //populates the articles array in the state object with the search results, from which we'll then render in the DOM 
             this.setState({articles: res.data.response.docs});
@@ -85,13 +85,13 @@ class Main extends Component {
     handleSaveButton = (id) => {
         const findArticleByID = this.state.articles.find((el) => el._id === id);
         const newSave = {title:findArticleByID.headline.main, date:findArticleByID.pub_date, url: findArticleByID.web_url};
-        API.saveArticle(newSave)
+        api.saveArticle(newSave)
         .then(this.getSavedArticles());
     }
 
     //remove article from the db upon the delete button being pressed
     handleDeleteButton = (id) => {
-        API.deleteArticle(id)
+        api.deleteArticle(id)
         .then(this.getSavedArticles());
     }
 
